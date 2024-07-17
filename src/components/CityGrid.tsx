@@ -63,7 +63,7 @@ const CityGrid: React.FC = () => {
         <SettingButton
           key={index}
           name={city}
-          isActive={city === selectedCity}
+          isActive={city.toLowerCase() === selectedCity}
           onClick={() => setSelectedCity(city)}
           style={{ height: "4rem", fontSize: "1.5rem" }}
         />
