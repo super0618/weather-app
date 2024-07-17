@@ -70,9 +70,8 @@ const Header: React.FC = () => {
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (
       e.keyCode === 13 &&
-      cities.filter((city) =>
-        city.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+      cities.filter((city) => city.toLowerCase() === searchQuery.toLowerCase())
+        .length
     ) {
       setSelectedCity(searchQuery);
       setSearchQuery("");
