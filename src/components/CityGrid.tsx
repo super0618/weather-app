@@ -32,30 +32,10 @@ const Grid = styled.div`
   }
 `;
 
-const cities = [
-  "New York",
-  "London",
-  "Tokyo",
-  "Paris",
-  "Berlin",
-  "Moscow",
-  "Beijing",
-  "Sydney",
-  "Rome",
-  "Madrid",
-  "Toronto",
-  "Dubai",
-  "Mumbai",
-  "Los Angeles",
-  "Buenos Aires",
-  "Cairo",
-  "Istanbul",
-  "Seoul",
-];
-
 const CityGrid: React.FC = () => {
   const setSelectedCity = useWeatherStore((state) => state.setSelectedCity);
   const selectedCity = useWeatherStore((state) => state.selectedCity);
+  const cities = useWeatherStore((state) => state.citis);
 
   return (
     <Grid>
@@ -63,7 +43,7 @@ const CityGrid: React.FC = () => {
         <SettingButton
           key={index}
           name={city}
-          isActive={city.toLowerCase() === selectedCity}
+          isActive={city.toLowerCase() === selectedCity?.toLowerCase()}
           onClick={() => setSelectedCity(city)}
           style={{ height: "4rem", fontSize: "1.5rem" }}
         />

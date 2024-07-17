@@ -106,7 +106,7 @@ const Forecast: React.FC<ForecastProps> = ({ forecastType }) => {
   useEffect(() => {
     switch (unit) {
       case "imperial":
-        setTempUnit("K");
+        setTempUnit("°F");
         break;
       case "metric":
         setTempUnit("°C");
@@ -216,37 +216,31 @@ const Forecast: React.FC<ForecastProps> = ({ forecastType }) => {
         <>
           <WeatherTitle>{fiveDayForecast.city.name}</WeatherTitle>
           <ForecastDataContainer>
-            {forecastList?.map(
-              (forecasts: any, index: number) => (
-                // forecasts?.map((forecast: any, index1: number) => {
-                <ForecastItem key={index}>
-                  <DetailInfo>
-                    {new Date(forecasts[0].dt_txt).toLocaleDateString("en-US", {
-                      weekday: "short",
-                      timeZone: "UTC",
-                    })}
-                  </DetailInfo>
-                  <WeatherIcon weather={forecasts[0].weather[0].main} />
-                  <DetailInfo>{forecasts[0].weather[0].main}</DetailInfo>
-                  <DetailInfo>
-                    H:&nbsp;
-                    {forecasts.reduce(
-                      (min: any, curr: any) =>
-                        Math.min(min, curr.main.temp_min),
-                      Infinity
-                    )}
-                    {tempUnit} / L:&nbsp;
-                    {forecasts.reduce(
-                      (max: any, curr: any) =>
-                        Math.max(max, curr.main.temp_max),
-                      -Infinity
-                    )}
-                    {tempUnit}
-                  </DetailInfo>
-                </ForecastItem>
-              )
-              // })
-            )}
+            {forecastList?.map((forecasts: any, index: number) => (
+              <ForecastItem key={index}>
+                <DetailInfo>
+                  {new Date(forecasts[0].dt_txt).toLocaleDateString("en-US", {
+                    weekday: "short",
+                    timeZone: "UTC",
+                  })}
+                </DetailInfo>
+                <WeatherIcon weather={forecasts[0].weather[0].main} />
+                <DetailInfo>{forecasts[0].weather[0].main}</DetailInfo>
+                <DetailInfo>
+                  H:&nbsp;
+                  {forecasts.reduce(
+                    (min: any, curr: any) => Math.min(min, curr.main.temp_min),
+                    Infinity
+                  )}
+                  {tempUnit} / L:&nbsp;
+                  {forecasts.reduce(
+                    (max: any, curr: any) => Math.max(max, curr.main.temp_max),
+                    -Infinity
+                  )}
+                  {tempUnit}
+                </DetailInfo>
+              </ForecastItem>
+            ))}
           </ForecastDataContainer>
           <CurrentFooter>
             <SettingContainer>

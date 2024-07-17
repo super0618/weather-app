@@ -65,11 +65,18 @@ const Header: React.FC = () => {
   const setSelectedCity = useWeatherStore((state) => state.setSelectedCity);
   const setTheme = useWeatherStore((state) => state.setTheme);
   const theme = useWeatherStore((state) => state.theme);
+  const cities = useWeatherStore((state) => state.citis);
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setSelectedCity(searchQuery);
-    setSearchQuery("");
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (
+      e.keyCode === 13 &&
+      cities.filter((city) =>
+        city.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    ) {
+      setSelectedCity(searchQuery);
+      setSearchQuery("");
+    }
   };
 
   return (
@@ -79,13 +86,12 @@ const Header: React.FC = () => {
         <FunctionGroup>
           {isSearchInput ? (
             <SearchContainer>
-              <form onSubmit={handleSearch}>
-                <SearchInput
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search"
-                />
-              </form>
+              <SearchInput
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => handleSearch(e)}
+                placeholder="Search"
+              />
               <SearchClose style={{}} onClick={() => setIsSearchInput(false)} />
             </SearchContainer>
           ) : (

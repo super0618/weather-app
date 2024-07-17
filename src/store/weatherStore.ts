@@ -5,6 +5,7 @@ interface WeatherState {
   unit: "metric" | "imperial" | "standard";
   timeFormat: "12-hour" | "24-hour";
   theme: "light" | "dark";
+  citis: string[];
   setSelectedCity: (city: string | null) => void;
   setUnit: (unit: "metric" | "imperial" | "standard") => void;
   setTimeFormat: (format: "12-hour" | "24-hour") => void;
@@ -16,6 +17,26 @@ const useWeatherStore = create<WeatherState>((set) => ({
   unit: "metric",
   timeFormat: "24-hour",
   theme: "light",
+  citis: [
+    "New York",
+    "London",
+    "Tokyo",
+    "Paris",
+    "Berlin",
+    "Moscow",
+    "Beijing",
+    "Sydney",
+    "Rome",
+    "Madrid",
+    "Toronto",
+    "Dubai",
+    "Mumbai",
+    "Los Angeles",
+    "Buenos Aires",
+    "Cairo",
+    "Istanbul",
+    "Seoul",
+  ],
   setSelectedCity: (city) => set(() => ({ selectedCity: city })),
   setUnit: (unit) => set(() => ({ unit })),
   setTimeFormat: (format) => set(() => ({ timeFormat: format })),
