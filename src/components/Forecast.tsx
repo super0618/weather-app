@@ -138,7 +138,10 @@ const Forecast: React.FC<ForecastProps> = ({ forecastType }) => {
       const doubleArray = Object.entries(groupedData).map(
         ([date, entries]) => entries
       );
-      setForecastList(doubleArray.slice(1));
+
+      setForecastList(
+        doubleArray.length === 6 ? doubleArray.slice(1) : doubleArray
+      );
     }
   }, [fiveDayForecast]);
 
